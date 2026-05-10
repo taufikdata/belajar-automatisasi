@@ -15,6 +15,9 @@ except ImportError as e:
     print("Jalankan: pip install customtkinter pyautogui pyperclip pynput")
     sys.exit(1)
 
+# Ukuran layar untuk moveTo tengah
+lebar_layar, tinggi_layar = pyautogui.size()
+
 # ══════════════════════════════════════════
 #  KONFIGURASI TAMPILAN
 # ══════════════════════════════════════════
@@ -83,7 +86,9 @@ def isi_form_awal(jenis_kerusakan, config, log_fn):
     pyautogui.hotkey("ctrl", "v")
     time.sleep(0.02)
 
-    log_fn(f"✅ Diisi: {jenis_kerusakan} — gambar kotak secara manual")
+    # Pindahkan kursor ke tengah layar supaya user langsung bisa gambar kotak
+    pyautogui.moveTo(lebar_layar / 2, tinggi_layar / 2)
+    log_fn(f"✅ Diisi: {jenis_kerusakan} — silakan gambar kotak kerusakan!")
 
 def isi_lajur_dan_simpan(config, lebar_lajur_input, log_fn):
     x, y = config["lebar_lajur"]
